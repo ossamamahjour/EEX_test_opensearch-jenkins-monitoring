@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenSearch Monitor Configuration</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .button { padding: 8px 16px; margin-right: 5px; text-decoration: none; background-color: #4CAF50; color: white; border-radius: 4px; }
+        .delete { background-color: #f44336; }
+        .blue { background-color: #2196F3; }
+        .message { padding: 10px; margin-bottom: 20px; background-color: #dff0d8; border-color: #d6e9c6; color: #3c763d; }
+        .status { margin-bottom: 20px; }
+        .status-item { margin-bottom: 5px; }
+        .status-good { color: green; }
+        .status-bad { color: red; }
+    </style>
+    <script>
+        function setupIndexes() {
+            fetch('/setup-indexes')
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.results.join('\n'));
+                    window.location.reload();
+                });
+        }
+        
+        function triggerJob() {
+            fetch('/trigger-job')
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.status);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>OpenSearch Monitor Configuration</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="status">
+        <h2>System Status</h2>
+        <div class="status-item">
+            OpenSearch: <span class="{{ 'status-good' if opensearch_status == 'Running' else 'status-bad' }}">{{ opensearch_status }}</span>
+        </div>
+        
+        <h3>Index Status</h3>
+        {% for idx, status in index_status.items() %}
+        <div class="status-item">
+            {{ idx }}: <span class="{{ 'status-good' if status == 'Exists' else 'status-bad' }}">{{ status }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('add_monitor') }}" class="button">Add New Monitor</a>
+        <button onclick="setupIndexes()" class="button blue">Setup Indexes</button>
+        <button onclick="triggerJob()" class="button blue">Trigger Job Now</button>
+    </div>
+    
+    <p>The automated job will run each night to apply these configurations.</p>
+    
+    <h2>Current Monitors</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Index</th>
+                <th>Text to Scan</th>
+                <th>Time Window</th>
+                <th>Notification Channel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, monitor in enumerate(monitors) %}
+            <tr>
+                <td>{{ monitor.Monitor_Name }}</td>
+                <td>{{ monitor.Index }}</td>
+                <td>{{ monitor.Text2Scan_in_Message }}</td>
+                <td>{{ monitor.Time2Scan }}</td>
+                <td>{{ monitor.notificantion_channel }}</td>
+                <td>
+                    <a href="{{ url_for('edit_monitor', index=i) }}" class="button">Edit</a>
+                    <a href="{{ url_for('delete_monitor', index=i) }}" class="button delete" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+            
