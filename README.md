@@ -14,30 +14,70 @@ The solution consists of four main components running in Docker containers:
 4. **Monitor UI** - Custom web interface for business users to manage monitor configurations
 
 ```
-┌───────────────┐     ┌───────────────────┐
-│               │     │                   │
-│   Monitor UI  │◄────┤  Business Users   │
-│  (Port 5000)  │     │                   │
-│               │     └───────────────────┘
-└───────┬───────┘
-        │
-        │ updates
-        ▼
-┌───────────────┐     ┌───────────────┐     ┌───────────────┐
-│               │     │               │     │               │
-│ Configuration │◄────┤    Jenkins    │────►│  OpenSearch   │
-│  (JSON file)  │     │  (Port 8080)  │     │  (Port 9200)  │
-│               │     │               │     │               │
-└───────────────┘     └───────────────┘     └───────┬───────┘
-                                                    │
-                                                    │
-                                            ┌───────▼───────┐
-                                            │               │
-                                            │   OpenSearch  │
-                                            │   Dashboards  │
-                                            │  (Port 5601)  │
-                                            │               │
-                                            └───────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│                      OPENSEARCH MONITOR AUTOMATION                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│                         DOCKER CONTAINER ENVIRONMENT                    │
+│                                                                         │
+├─────────────────┬─────────────────┬─────────────────┬─────────────────┤
+│                 │                 │                 │                 │
+│   ┌─────────┐   │   ┌─────────┐   │   ┌─────────┐   │   ┌─────────┐   │
+│   │         │   │   │         │   │   │         │   │   │         │   │
+│   │ MONITOR │   │   │ JENKINS │   │   │OPENSEARCH│   │   │OPENSEARCH│   │
+│   │   UI    │◄──┼───┤         │   │   │         │   │   │DASHBOARDS│   │
+│   │PORT:5000│   │   │PORT:8080│   │   │PORT:9200│   │   │PORT:5601 │   │
+│   │         │   │   │         │   │   │         │   │   │         │   │
+│   └────┬────┘   │   └────┬────┘   │   └────┬────┘   │   └────┬────┘   │
+│        │        │        │        │        │        │        │        │
+└────────┼────────┴────────┼────────┴────────┼────────┴────────┼────────┘
+         │                 │                 │                 │
+         │                 │                 │                 │
+         ▼                 │                 │                 ▼
+┌────────────────┐         │                 │         ┌────────────────┐
+│                │         │                 │         │                │
+│  Business User │         │                 │         │ IT/Operations  │
+│   Interface    │         │                 │         │    Interface   │
+│                │         │                 │         │                │
+└────────┬───────┘         │                 │         └────────────────┘
+         │                 │                 │
+         │                 │                 │
+         │     ┌───────────▼─────────┐       │
+         │     │                     │       │
+         └────►│       Monitors      │◄──────┘
+               │    Configuration    │
+               │    (JSON File)      │
+               │                     │
+               └─────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│                           DATA & WORKFLOW                               │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  1. Business users manage monitors through the web UI (port 5000)       │
+│                                                                         │
+│  2. Changes are saved to the monitors.json configuration file           │
+│                                                                         │
+│  3. "Trigger Job Now" button or scheduled Jenkins job applies changes   │
+│                                                                         │
+│  4. Jenkins executes the update_monitors.sh script                      │
+│                                                                         │
+│  5. Script creates/updates monitors in OpenSearch via API               │
+│                                                                         │
+│  6. OpenSearch processes monitors, checking indexes for matching data   │
+│                                                                         │
+│  7. Alerts are triggered based on monitor conditions                    │
+│                                                                         │
+│  8. Results can be viewed in OpenSearch Dashboards                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 All components communicate via a shared Docker network, and persistent data is stored in Docker volumes.
