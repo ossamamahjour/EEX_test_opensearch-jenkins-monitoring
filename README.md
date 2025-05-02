@@ -126,9 +126,9 @@ See [docker-compose.yml](opensearch-test/docker-compose.yml) for the configurati
 
 Create the following files for the Monitor UI component:
 
-- [Dockerfile](./monitor-ui/Dockerfile) - Container definition for the Monitor UI
-- [requirements.txt](./monitor-ui/requirements.txt) - Python dependencies
-- [app.py](./monitor-ui/app.py) - Flask application that provides the web interface
+- [Dockerfile](opensearch-test/monitor-ui/Dockerfile) - Container definition for the Monitor UI
+- [requirements.txt](opensearch-test/monitor-ui/requirements.txt) - Python dependencies
+- [app.py](opensearch-test/monitor-ui/app.py) - Flask application that provides the web interface
 
 The application also creates HTML templates when first run:
 - `templates/index.html` - Main dashboard view
@@ -137,7 +137,7 @@ The application also creates HTML templates when first run:
 
 ### 5. Create the Monitoring Script
 
-Create the [update_monitors.sh](./config/update_monitors.sh) script in the config directory. This script is responsible for reading the monitor configurations from the JSON file and creating/updating monitors in OpenSearch.
+Create the [update_monitors.sh](opensearch-test/config/update_monitors.sh) script in the config directory. This script is responsible for reading the monitor configurations from the JSON file and creating/updating monitors in OpenSearch.
 
 Make the script executable:
 ```bash
@@ -146,7 +146,7 @@ chmod +x config/update_monitors.sh
 
 ### 6. Create Initial Monitors JSON File
 
-Create the [monitors.json](./config/monitors.json) file in the config directory with the initial monitor configurations.
+Create the [monitors.json](opensearch-test/config/monitors.json) file in the config directory with the initial monitor configurations.
 
 ### 7. Build and Start the Environment
 
