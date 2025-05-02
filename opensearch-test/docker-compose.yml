@@ -9,15 +9,15 @@ services:
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
       - "DISABLE_SECURITY_PLUGIN=true"
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
-    ulimits:
+    ulimits: 
       memlock:
-        soft: -1
-        hard: -1
+        soft: -1  # set to unlimited
+        hard: -1   # set to unlimited
     volumes:
       - opensearch-data:/usr/share/opensearch/data
     ports:
       - 9200:9200
-      - 9600:9600
+      - 9600:9600 # for performance analyzer
     networks:
       - opensearch-net
 
@@ -40,7 +40,7 @@ services:
     user: root
     ports:
       - 8080:8080
-      - 50000:50000
+      - 50000:50000   # for JNLP agents
     volumes:
       - jenkins-data:/var/jenkins_home
       - ./config:/config
