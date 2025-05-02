@@ -6,20 +6,6 @@
       "Text2Scan_in_Message": "error",
       "Time2Scan": "5m",
       "notificantion_channel": "notification_channel_1"
-    },
-    {
-      "Monitor_Name": "Index B check for error",
-      "Index": "Index_B",
-      "Text2Scan_in_Message": "error",
-      "Time2Scan": "5m",
-      "notificantion_channel": "notification_channel_2"
-    },
-    {
-      "Monitor_Name": "Index C check for error",
-      "Index": "Index_C",
-      "Text2Scan_in_Message": "error",
-      "Time2Scan": "5m",
-      "notificantion_channel": "notification_channel_3"
     }
   ]
 }
