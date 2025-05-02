@@ -120,7 +120,7 @@ mkdir -p monitor-ui/templates config
 
 Create the `docker-compose.yml` file in the project root directory. This file defines the container setup for OpenSearch, OpenSearch Dashboards, Jenkins, and our custom Monitor UI application.
 
-See [docker-compose.yml](./docker-compose.yml) for the configuration.
+See [docker-compose.yml](opensearch-test/docker-compose.yml) for the configuration.
 
 ### 4. Create Monitor UI Files
 
