@@ -242,25 +242,6 @@ INDEX_MAPPING = {
 }
 ```
 
-### Monitors Not Appearing in OpenSearch Dashboards
-
-If monitors aren't showing up in OpenSearch Dashboards:
-
-1. Ensure notification channels exist:
-   ```bash
-   curl http://localhost:9200/_plugins/_notifications/configs
-   ```
-
-2. Manually run the update script with verbose output:
-   ```bash
-   docker exec -it monitor-ui bash -c "bash /config/update_monitors.sh"
-   ```
-
-3. Check if the alerting plugin is enabled:
-   ```bash
-   curl http://localhost:9200/_cat/plugins
-   ```
-
 ## Assumptions
 
 1. **OpenSearch Setup**: 
@@ -290,4 +271,4 @@ If monitors aren't showing up in OpenSearch Dashboards:
 
 6. **Security Considerations**:
    - This is a test environment, so security is minimal
-   - In production, we would implement proper authentication, HTTPS, and secure secrets management
+   - In production, we need to implement proper authentication, HTTPS, and secure secrets management
