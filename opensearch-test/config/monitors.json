@@ -1,11 +1,11 @@
 {
   "Monitors": [
     {
-      "Monitor_Name": "Index A check for error",
-      "Index": "Index_A",
+      "Monitor_Name": "Index B check for error",
+      "Index": "Index_B",
       "Text2Scan_in_Message": "error",
       "Time2Scan": "5m",
-      "notificantion_channel": "notification_channel_1"
+      "notificantion_channel": "notification_channel_2"
     }
   ]
 }

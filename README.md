@@ -204,6 +204,39 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 3. Changes are automatically saved to the configuration file
 4. The Jenkins job will run nightly at midnight to apply changes to OpenSearch
 
+I'll help you add a demo and screenshot section to your README file. This will enhance the documentation by providing visual context for users who want to understand how your OpenSearch Monitor Automation Solution works in practice.
+
+Here's a section you can add to your README file:
+
+## Demo and Screenshots
+
+To provide a better understanding of the solution in action, below are some screenshots for demo:
+
+### Monitor UI WebApp
+![Monitor UI App](opensearch-test/Screen_Demo/monitor_ui_app .png)
+*Screenshot showing the main dashboard of the Monitor UI with the list of current monitors, the "Setup Indexes" button, and the "Add New Monitor" button.*
+
+### Adding a New Monitor
+![Adding a New Monitor](images/add-monitor.png)
+*Screenshot of the add monitor form showing all input fields for creating a new OpenSearch monitor.*
+
+### Editing an Existing Monitor
+![Editing a Monitor](images/edit-monitor.png)
+*Screenshot of the edit monitor form with pre-populated values for an existing monitor.*
+
+### Jenkins Job Configuration
+![Jenkins Job Configuration](images/jenkins-job.png)
+*Screenshot of the Jenkins job configuration page showing the build triggers and shell command.*
+
+### Jenkins Build History
+![Jenkins Build History](images/jenkins-build-history.png)
+*Screenshot of the Jenkins build history showing successful monitor update jobs.*
+
+### OpenSearch Dashboards Alerting
+![OpenSearch Dashboards Alerting](images/opensearch-alerting.png)
+*Screenshot of the OpenSearch Dashboards Alerting section showing the monitors created through the automation.*
+
+
 ## Troubleshooting
 
 ### Docker Not Running
