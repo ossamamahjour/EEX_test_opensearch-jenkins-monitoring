@@ -213,7 +213,7 @@ Here's a section you can add to your README file:
 To provide a better understanding of the solution in action, below are some screenshots for demo:
 
 ### Monitor UI WebApp
-![Monitor UI App](opensearch-test/Screen_Demo/monitor_ui_app .png)
+![Monitor UI App](Screen_Demo/monitor_ui_app .png)
 *Screenshot showing the main dashboard of the Monitor UI with the list of current monitors, the "Setup Indexes" button, and the "Add New Monitor" button.*
 
 ### Adding a New Monitor
