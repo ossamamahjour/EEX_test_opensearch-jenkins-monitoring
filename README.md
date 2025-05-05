@@ -216,6 +216,7 @@ The following screenshots showcase the complete workflow of the OpenSearch Monit
 ![Monitor UI App](demo/monitor_ui_app.png)
 *Screenshot showing the main dashboard of the Monitor UI with the list of current monitors, the "Setup Indexes" button, and the "Add New Monitor" button.*
 
+### Create Indexes
 ![Create index](demo/Create_index.png)
 *The index creation process is simplified through the UI. With a single click, users can create all necessary OpenSearch indexes required for the monitors to function properly. This eliminates the need for direct API access to OpenSearch.*
 
