@@ -210,31 +210,34 @@ Here's a section you can add to your README file:
 
 ## Demo and Screenshots
 
-To provide a better understanding of the solution in action, below are some screenshots for demo:
+The following screenshots showcase the complete workflow of the OpenSearch Monitor Automation Solution, demonstrating how business users can easily manage OpenSearch monitors through a user-friendly interface without needing technical expertise.
 
 ### Monitor UI WebApp
 ![Monitor UI App](demo/monitor_ui_app.png)
 *Screenshot showing the main dashboard of the Monitor UI with the list of current monitors, the "Setup Indexes" button, and the "Add New Monitor" button.*
 
+![Create index](demo/Create_index.png)
+*The index creation process is simplified through the UI. With a single click, users can create all necessary OpenSearch indexes required for the monitors to function properly. This eliminates the need for direct API access to OpenSearch.*
+
 ### Adding a New Monitor
-![Adding a New Monitor](images/add-monitor.png)
-*Screenshot of the add monitor form showing all input fields for creating a new OpenSearch monitor.*
+![Adding a New Monitor](demo/add_new_monitor.png)
+*The "Add New Monitor" functionality allows business users to create new monitors with a simple form interface. All monitor parameters can be configured without writing JSON manually.*
 
 ### Editing an Existing Monitor
-![Editing a Monitor](images/edit-monitor.png)
-*Screenshot of the edit monitor form with pre-populated values for an existing monitor.*
+![Editing a Monitor](demo/edit_monitor.png)
+*Existing monitors can be easily modified through the edit interface. All current settings are pre-populated in the form for easy updating.*
 
-### Jenkins Job Configuration
-![Jenkins Job Configuration](images/jenkins-job.png)
-*Screenshot of the Jenkins job configuration page showing the build triggers and shell command.*
+### Immediate Deployment Option
+![Trigger_job](demo/Trigger_job_now.png)
+*The "Trigger Job Now" button provides instant deployment capability for monitor configurations. When business users make changes to monitors, they don't need to wait for the scheduled nightly Jenkins job to apply their configurations. Instead, they can click this button to immediately execute the update_monitors.sh script*
 
 ### Jenkins Build History
-![Jenkins Build History](images/jenkins-build-history.png)
-*Screenshot of the Jenkins build history showing successful monitor update jobs.*
+![Jenkins Build History](demo/Jenkins.png)
+*The solution uses Jenkins as the automation server to handle the scheduled updates of monitors. A Jenkins job runs the update_monitors.sh script, which reads the monitor configurations from the JSON file and applies them to OpenSearch.*
 
 ### OpenSearch Dashboards Alerting
-![OpenSearch Dashboards Alerting](images/opensearch-alerting.png)
-*Screenshot of the OpenSearch Dashboards Alerting section showing the monitors created through the automation.*
+![OpenSearch Dashboards Alerting](demo/opensearch_dashboards.png)
+*After the monitor configurations are applied, users can verify the results in OpenSearch Dashboards by navigating to the Alerting section.*
 
 
 ## Troubleshooting
